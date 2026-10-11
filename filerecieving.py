@@ -4,7 +4,7 @@ import threading
 import transcription
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-server_socket.bind(('localhost', 1532))
+server_socket.bind(('0.0.0.0', 1532))
 
 server_socket.listen(2)
 print("Listening on port 1532")

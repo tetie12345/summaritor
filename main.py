@@ -1,3 +1,5 @@
+import asyncio
+
 import cv2
 import sounddevice as sd
 import wavio as wv
@@ -43,3 +45,6 @@ finally:
     cv2.destroyAllWindows()
 
     #send files
+    connection = filesending.open_connection("100.97.243.4", 1532)
+    asyncio.run(filesending.send_file(connection, "output.wav"))
+    print("done")
