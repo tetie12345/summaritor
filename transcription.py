@@ -10,6 +10,7 @@ for pkg in (nvidia.cublas.lib, nvidia.cudnn.lib):
             pass  # some libs depend on others that load later; ignore
 
 from faster_whisper import WhisperModel
+import summarisor
 
 model_size = "large-v3"
 
@@ -31,15 +32,17 @@ def transcribe(file):
         segmentsTemp.append(segment)
         print("[%.2fs -> %.2fs] %s" % (segment.start, segment.end, segment.text))
     segments = segmentsTemp
-    write_transcription(segments)
+    write_transcription(segments, file)
 
-def write_transcription(segments):
+def write_transcription(segments, file: str):
     print(segments)
-    with open("transcription.txt", "w") as output:
+    filename = f"{file.removesuffix('.wav')}-transcribed"
+    with open(filename, "w") as output:
         data= []
         for segment in segments:
             data.append([segment.start, segment.end, segment.text])
         output.write(str(data))
+    summarisor.summarise(filename)
 
 if __name__ == "__main__":
     pass

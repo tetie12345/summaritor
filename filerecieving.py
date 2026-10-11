@@ -23,6 +23,7 @@ while 1:
             data = connection.recv(1024)
             print(filename)
             if not data:
-                thr = threading.Thread(target=transcription.transcribe, args=(filename,)).start()
+                if filename.endswith(".wav"):
+                    thr = threading.Thread(target=transcription.transcribe, args=(filename,)).start()
                 break
             file.write(data)
