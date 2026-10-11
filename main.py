@@ -2,6 +2,7 @@ import cv2
 import sounddevice as sd
 import wavio as wv
 import numpy as np
+import filesending
 
 camera = cv2.VideoCapture(0)
 
@@ -41,4 +42,4 @@ finally:
     videoOut.release()
     cv2.destroyAllWindows()
 
-print(audioOut)
+    #send files
